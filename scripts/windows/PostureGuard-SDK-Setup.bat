@@ -50,7 +50,7 @@ if not exist "%TARGET_DIR%\example.js" (
   >"%TARGET_DIR%\example.js" echo import { PostureDetector } from "posture-guard-sdk";
   >>"%TARGET_DIR%\example.js" echo.
   >>"%TARGET_DIR%\example.js" echo const detector = new PostureDetector();
-  >>"%TARGET_DIR%\example.js" echo detector.on("alert", function (alert) { console.warn(alert.message); });
+  >>"%TARGET_DIR%\example.js" echo detector.on("alert", function (postureAlert) { console.warn(postureAlert.message); });
   >>"%TARGET_DIR%\example.js" echo.
   >>"%TARGET_DIR%\example.js" echo // Start posture detection in your app flow:
   >>"%TARGET_DIR%\example.js" echo // await detector.start();
