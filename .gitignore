@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/packages/*/node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -44,3 +45,6 @@ next-env.d.ts
 
 # electron builds
 /dist/
+
+# SDK build output
+/packages/posture-guard-sdk/dist/

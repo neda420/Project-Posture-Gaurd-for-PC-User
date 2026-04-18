@@ -71,10 +71,11 @@ export default function PostureCamera() {
                if (verticalDistance < 100) { // arbitrary threshold for leaning/slouching
                   setPostureStatus("Slouching");
                   
-                  // IPC to Electron main process
-                  if (typeof window !== "undefined" && (window as any).require) {
-                    const { ipcRenderer } = (window as any).require("electron");
-                    ipcRenderer.send("trigger-alert");
+                  // Use the secure contextBridge API injected by preload.js.
+                  // This replaces the unsafe `window.require('electron')` pattern.
+                  const win = window as unknown as { postureGuardAPI?: { triggerAlert: () => void } };
+                  if (typeof window !== "undefined" && win.postureGuardAPI) {
+                    win.postureGuardAPI.triggerAlert();
                   }
                } else {
                   setPostureStatus("Good");

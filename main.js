@@ -14,11 +14,13 @@ function createWindow() {
     minWidth: 800,
     minHeight: 600,
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
-      enableRemoteModule: true,
+      // Security hardening: keep Node.js out of the renderer process.
+      // All Node/Electron access must go through the contextBridge in preload.js.
+      nodeIntegration: false,
+      contextIsolation: true,
+      sandbox: true,
+      preload: path.join(__dirname, 'preload.js'),
     },
-    // Customize title bar for a modern look if needed
     autoHideMenuBar: true,
   });
 
@@ -29,13 +31,16 @@ function createWindow() {
     loadURL(mainWindow);
   }
 
-  // Handle "slouch" events to trigger native desktop notification
-  ipcMain.on('trigger-alert', (event, arg) => {
+  // Handle "slouch" events to trigger native desktop notification.
+  // Reply to the renderer so it can update its UI state.
+  ipcMain.on('trigger-alert', (event) => {
     new Notification({
       title: 'PostureGuard Alert 🧘',
       body: 'You are slouching! Please sit up straight.',
       silent: false
     }).show();
+    // Inform the renderer that the notification was sent.
+    event.sender.send('alert-shown', { timestamp: Date.now() });
   });
 
   mainWindow.on('closed', () => {
