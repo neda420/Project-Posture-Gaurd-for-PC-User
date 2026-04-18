@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="https://via.placeholder.com/150x150/1a1a2e/ffffff?text=Guard" alt="PostureGuard Logo" width="120" />
+  <h1>PostureGuard 🧘‍♂️</h1>
+  <p><strong>Maintain perfect posture and boost productivity with AI.</strong></p>
+  
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+  [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+  [![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/js)
+  [![Electron](https://img.shields.io/badge/Electron-47848F?style=flat&logo=electron&logoColor=white)](https://www.electronjs.org/)
+</div>
 
-## Getting Started
+<br />
 
-First, run the development server:
+PostureGuard is a cross-platform desktop application built for remote workers, developers, and students. By leveraging the power of **TensorFlow.js** directly on your device, it monitors your posture in real-time without sending any video data to the cloud.
+
+If you slouch or lean too far into the screen, PostureGuard will send a native desktop notification reminding you to sit up straight!
+
+## ✨ Features
+
+- **Real-Time Pose Tracking**: Uses `tfjs` and MoveNet to track your shoulders, eyes, and nose.
+- **Privacy First**: All machine learning runs purely on your local machine. No images are saved or transmitted.
+- **Pomodoro Timer**: Integrated task management to remind you to take breaks.
+- **Native Experience**: Packaged with Electron to provide native desktop notifications and an immersive dark-mode UI.
+- **Auto-Start**: Can be configured to run automatically when your computer starts.
+
+## 🚀 Installation & SDK Setup
+
+To use PostureGuard locally or develop it further:
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Getting Started
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/neda420/PostureGuard.git
+   cd PostureGuard
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run the application in Development Mode:**
+   ```bash
+   npm run dev:electron
+   ```
+
+### Building the Executable (SDK/App)
+
+To build the downloadable `.exe` (or `.dmg`/`.AppImage`):
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run build:electron
 ```
+The compiled executable will be located in the `dist` folder. Simply double-click to install!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧠 Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+PostureGuard is built on a modern, robust stack tailored for desktop applications:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Frontend UI**: Next.js (React)
+* **Desktop Shell**: Electron (with `electron-builder` for distribution)
+* **Machine Learning**: `@tensorflow/tfjs` + `@tensorflow-models/pose-detection`
+* **Local Database**: Prisma ORM with SQLite (for saving settings and Pomodoro stats locally)
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions, issues, and feature requests are welcome! 
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📜 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Distributed under the MIT License. See `LICENSE` for more information.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Inspired by the need for better ergonomics in the digital age.*
