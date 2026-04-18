@@ -21,7 +21,7 @@ const DEFAULT_OPTIONS = {
  * High-level posture detector.
  *
  * Opens the webcam, loads the TensorFlow.js MoveNet model, and continuously
- * analyses the user's posture.  Events are emitted for every detection frame
+ * analyzes the user's posture.  Events are emitted for every detection frame
  * and whenever a slouching alert fires.
  *
  * Requires `@tensorflow/tfjs` and `@tensorflow-models/pose-detection` to be
