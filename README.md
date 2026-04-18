@@ -38,7 +38,7 @@ Download and run this setup file to auto-install the SDK and required dependenci
 
 ➡️ **[Download SDK Setup File](https://raw.githubusercontent.com/neda420/Project-Posture-Gaurd-for-PC-User/main/scripts/windows/PostureGuard-SDK-Setup.bat)**
 
-After opening the file, it will automatically:
+After running the file, it will automatically:
 - create a local starter folder
 - install `posture-guard-sdk`
 - install required TensorFlow dependencies
