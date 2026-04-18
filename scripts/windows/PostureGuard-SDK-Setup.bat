@@ -51,7 +51,7 @@ if not exist "%TARGET_DIR%\example.js" (
   >>"%TARGET_DIR%\example.js" echo.
   >>"%TARGET_DIR%\example.js" echo // threshold is the maximum neck angle in degrees before slouch alerts trigger.
   >>"%TARGET_DIR%\example.js" echo const detector = new PostureDetector({ threshold: 120 });
-  >>"%TARGET_DIR%\example.js" echo detector.on("alert", (alert) =^> console.warn(alert.message));
+  >>"%TARGET_DIR%\example.js" echo detector.on("alert", function (alert) { console.warn(alert.message); });
   >>"%TARGET_DIR%\example.js" echo.
   >>"%TARGET_DIR%\example.js" echo // Start posture detection in your app flow:
   >>"%TARGET_DIR%\example.js" echo // await detector.start();
