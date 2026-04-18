@@ -36,7 +36,9 @@ Add posture detection to any web or Electron project in seconds:
 
 Download and run this setup file to auto-install the SDK and required dependencies:
 
-➡️ **[Download SDK Setup File](https://raw.githubusercontent.com/neda420/Project-Posture-Gaurd-for-PC-User/master/scripts/windows/PostureGuard-SDK-Setup.bat)**
+➡️ **[Download SDK Setup File (.bat)](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/blob/master/scripts/windows/PostureGuard-SDK-Setup.bat?raw=1)**
+
+If your browser shows script text, use **Right click → Save link as...** and save it as `PostureGuard-SDK-Setup.bat`, then double-click the saved file.
 
 After running the file, it will automatically:
 - create a local starter folder
