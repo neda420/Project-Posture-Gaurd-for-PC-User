@@ -32,6 +32,19 @@ If you slouch or lean too far into the screen, PostureGuard will send a native d
 
 Add posture detection to any web or Electron project in seconds:
 
+### One-click SDK setup (Windows PC)
+
+Download and run this setup file to auto-install the SDK and required dependencies:
+
+➡️ **[Download SDK Setup File](https://raw.githubusercontent.com/neda420/Project-Posture-Gaurd-for-PC-User/main/scripts/windows/PostureGuard-SDK-Setup.bat)**
+
+After opening the file, it will automatically:
+- create a local starter folder
+- install `posture-guard-sdk`
+- install required TensorFlow dependencies
+
+### Manual npm install
+
 ```bash
 npm install posture-guard-sdk @tensorflow/tfjs @tensorflow-models/pose-detection
 ```
