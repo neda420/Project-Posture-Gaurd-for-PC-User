@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import "@tensorflow/tfjs-backend-webgl";
+import { analyzePosture } from "posture-guard-sdk";
 
 export default function PostureCamera() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -56,31 +57,24 @@ export default function PostureCamera() {
           
           if (poses.length > 0) {
             const keypoints = poses[0].keypoints;
-            
-            // Posture evaluation logic (simplified)
-            // Calculate distance between shoulders and nose
-            const leftShoulder = keypoints.find((k) => k.name === "left_shoulder");
-            const rightShoulder = keypoints.find((k) => k.name === "right_shoulder");
-            const nose = keypoints.find((k) => k.name === "nose");
 
-            if (leftShoulder && rightShoulder && nose && leftShoulder.score! > 0.5 && rightShoulder.score! > 0.5) {
-               const shoulderY = (leftShoulder.y + rightShoulder.y) / 2;
-               // If nose drops too close to shoulders or shoulders become asymmetrical, alert
-               const verticalDistance = shoulderY - nose.y;
+            // Delegate posture analysis to the SDK to avoid duplicating logic.
+            const analysis = analyzePosture(keypoints);
 
-               if (verticalDistance < 100) { // arbitrary threshold for leaning/slouching
-                  setPostureStatus("Slouching");
-                  
-                  // Use the secure contextBridge API injected by preload.js.
-                  // This replaces the unsafe `window.require('electron')` pattern.
-                  const win = window as unknown as { postureGuardAPI?: { triggerAlert: () => void } };
-                  if (typeof window !== "undefined" && win.postureGuardAPI) {
-                    win.postureGuardAPI.triggerAlert();
-                  }
-               } else {
-                  setPostureStatus("Good");
+            if (analysis.status === "slouching") {
+               setPostureStatus("Slouching");
+
+               // Use the secure contextBridge API injected by preload.js.
+               // This replaces the unsafe `window.require('electron')` pattern.
+               const win = window as unknown as { postureGuardAPI?: { triggerAlert: () => void } };
+               if (typeof window !== "undefined" && win.postureGuardAPI) {
+                 win.postureGuardAPI.triggerAlert();
                }
+            } else if (analysis.status === "good") {
+               setPostureStatus("Good");
             }
+            // When status is "unknown" (keypoints unavailable) we leave the
+            // last known status displayed rather than clearing it.
 
             // Draw keypoints
             keypoints.forEach((keypoint) => {

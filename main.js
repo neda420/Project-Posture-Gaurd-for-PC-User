@@ -7,6 +7,19 @@ const loadURL = serve({ directory: 'out' });
 
 let mainWindow;
 
+// Handle "slouch" events to trigger native desktop notification.
+// Registered once at the module level so that reopening the window on macOS
+// (via the 'activate' event) does not stack duplicate listeners.
+ipcMain.on('trigger-alert', (event) => {
+  new Notification({
+    title: 'PostureGuard Alert 🧘',
+    body: 'You are slouching! Please sit up straight.',
+    silent: false
+  }).show();
+  // Inform the renderer that the notification was sent.
+  event.sender.send('alert-shown', { timestamp: Date.now() });
+});
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
@@ -30,18 +43,6 @@ function createWindow() {
   } else {
     loadURL(mainWindow);
   }
-
-  // Handle "slouch" events to trigger native desktop notification.
-  // Reply to the renderer so it can update its UI state.
-  ipcMain.on('trigger-alert', (event) => {
-    new Notification({
-      title: 'PostureGuard Alert 🧘',
-      body: 'You are slouching! Please sit up straight.',
-      silent: false
-    }).show();
-    // Inform the renderer that the notification was sent.
-    event.sender.send('alert-shown', { timestamp: Date.now() });
-  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
