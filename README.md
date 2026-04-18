@@ -144,7 +144,6 @@ npm run build      # ESM + CJS + type declarations
 * **Frontend UI**: Next.js 16 (React 19)
 * **Desktop Shell**: Electron 41 with `electron-builder`
 * **Machine Learning**: `@tensorflow/tfjs` + `@tensorflow-models/pose-detection` (MoveNet)
-* **Local Database**: Prisma ORM with SQLite
 * **SDK Build**: `tsup` (ESM + CJS + TypeScript declarations)
 * **Testing**: Vitest
 
