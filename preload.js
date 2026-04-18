@@ -10,6 +10,11 @@
  */
 const { contextBridge, ipcRenderer } = require("electron");
 
+// Keep a reference to the registered alert-shown listener so we can remove
+// exactly that one function on cleanup rather than wiping all listeners on the
+// channel (which would affect any other consumers of the same event).
+let _alertShownListener = null;
+
 contextBridge.exposeInMainWorld("postureGuardAPI", {
   /**
    * Notify the main process that a slouching posture was detected so it can
@@ -27,11 +32,20 @@ contextBridge.exposeInMainWorld("postureGuardAPI", {
   onAlertShown: (callback) => {
     // Validate that callback is actually a function.
     if (typeof callback !== "function") return;
-    ipcRenderer.on("alert-shown", (_event, data) => callback(data));
+    // Remove any previously registered listener before adding a new one so
+    // that repeated calls (e.g. React StrictMode double-mount) do not stack.
+    if (_alertShownListener) {
+      ipcRenderer.removeListener("alert-shown", _alertShownListener);
+    }
+    _alertShownListener = (_event, data) => callback(data);
+    ipcRenderer.on("alert-shown", _alertShownListener);
   },
 
-  /** Remove all `alert-shown` listeners (call on component unmount). */
+  /** Remove the `alert-shown` listener registered by `onAlertShown` (call on component unmount). */
   removeAlertListeners: () => {
-    ipcRenderer.removeAllListeners("alert-shown");
+    if (_alertShownListener) {
+      ipcRenderer.removeListener("alert-shown", _alertShownListener);
+      _alertShownListener = null;
+    }
   },
 });
