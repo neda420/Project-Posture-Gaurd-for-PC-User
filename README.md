@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://via.placeholder.com/150x150/1a1a2e/ffffff?text=Guard" alt="PostureGuard Logo" width="120" />
+  
   <h1>PostureGuard 🧘‍♂️</h1>
   <p><strong>Maintain perfect posture and boost productivity with AI.</strong></p>
   
