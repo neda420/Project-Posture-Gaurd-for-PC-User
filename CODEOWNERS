@@ -1,0 +1,18 @@
+# Code owners
+# Each line maps a path pattern to the GitHub users/teams responsible for review.
+# Syntax: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global default – all files
+*                                   @neda420
+
+# SDK core
+/packages/posture-guard-sdk/        @neda420
+
+# CI / infrastructure
+/.github/                           @neda420
+
+# Documentation
+/docs/                              @neda420
+README.md                           @neda420
+CONTRIBUTING.md                     @neda420
+CHANGELOG.md                        @neda420

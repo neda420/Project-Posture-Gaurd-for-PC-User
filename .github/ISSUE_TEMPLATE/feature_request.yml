@@ -1,0 +1,52 @@
+name: 💡 Feature Request
+description: Suggest an idea or improvement
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a new feature!  
+        Please provide as much context as possible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: >
+        Describe the problem or limitation you are facing.
+        A clear problem statement helps us understand the motivation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe what you would like to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workarounds or alternative solutions you have tried?
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component does this relate to?
+      options:
+        - Electron app (desktop)
+        - posture-guard-sdk (npm package)
+        - CI / build
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Screenshots, links, code snippets—anything that helps.

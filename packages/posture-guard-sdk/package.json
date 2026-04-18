@@ -1,0 +1,78 @@
+{
+  "name": "posture-guard-sdk",
+  "version": "1.0.0",
+  "description": "Framework-agnostic posture detection SDK powered by TensorFlow.js MoveNet. Works in any browser-based environment including React, Vue, vanilla JS, and Electron.",
+  "keywords": [
+    "posture",
+    "ergonomics",
+    "pose-detection",
+    "tensorflow",
+    "mediapipe",
+    "webcam",
+    "health",
+    "sdk"
+  ],
+  "author": "MD. Nadimul Islam",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neda420/Project-Posture-Gaurd-for-PC-User.git",
+    "directory": "packages/posture-guard-sdk"
+  },
+  "homepage": "https://github.com/neda420/Project-Posture-Gaurd-for-PC-User#readme",
+  "bugs": {
+    "url": "https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build && npm run test"
+  },
+  "peerDependencies": {
+    "@tensorflow-models/pose-detection": ">=2.0.0",
+    "@tensorflow/tfjs": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@tensorflow/tfjs": {
+      "optional": false
+    },
+    "@tensorflow-models/pose-detection": {
+      "optional": false
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  }
+}

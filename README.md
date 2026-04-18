@@ -4,6 +4,8 @@
   <p><strong>Maintain perfect posture and boost productivity with AI.</strong></p>
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+  [![npm version](https://img.shields.io/npm/v/posture-guard-sdk)](https://www.npmjs.com/package/posture-guard-sdk)
+  [![CI](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/actions/workflows/ci.yml/badge.svg)](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/actions/workflows/ci.yml)
   [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://reactjs.org/)
   [![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-FF6F00?style=flat&logo=tensorflow&logoColor=white)](https://www.tensorflow.org/js)
   [![Electron](https://img.shields.io/badge/Electron-47848F?style=flat&logo=electron&logoColor=white)](https://www.electronjs.org/)
@@ -11,7 +13,7 @@
 
 <br />
 
-PostureGuard is a cross-platform desktop application built for remote workers, developers, and students. By leveraging the power of **TensorFlow.js** directly on your device, it monitors your posture in real-time without sending any video data to the cloud.
+PostureGuard is a cross-platform desktop application **and** an npm SDK built for remote workers, developers, and students. By leveraging the power of **TensorFlow.js** directly on your device, it monitors your posture in real-time without sending any video data to the cloud.
 
 If you slouch or lean too far into the screen, PostureGuard will send a native desktop notification reminding you to sit up straight!
 
@@ -22,63 +24,133 @@ If you slouch or lean too far into the screen, PostureGuard will send a native d
 - **Pomodoro Timer**: Integrated task management to remind you to take breaks.
 - **Native Experience**: Packaged with Electron to provide native desktop notifications and an immersive dark-mode UI.
 - **Auto-Start**: Can be configured to run automatically when your computer starts.
+- **npm SDK**: Use `posture-guard-sdk` in any React, Vue, Svelte, or vanilla JS project.
 
-## 🚀 Installation & SDK Setup
+---
 
-To use PostureGuard locally or develop it further:
+## 📦 Install the SDK
+
+Add posture detection to any web or Electron project in seconds:
+
+```bash
+npm install posture-guard-sdk @tensorflow/tfjs @tensorflow-models/pose-detection
+```
+
+```ts
+import { PostureDetector } from "posture-guard-sdk";
+
+const detector = new PostureDetector({ threshold: 120 });
+
+detector.on("alert", (alert) => {
+  console.warn(alert.message); // "You are slouching!"
+});
+
+await detector.start();
+```
+
+→ See [docs/QUICK_START.md](docs/QUICK_START.md) and the [full API reference](docs/API.md).
+
+---
+
+## 🖥️ Download the Desktop App
+
+Pre-built installers are attached to every [GitHub Release](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/releases):
+
+| Platform | File |
+|---|---|
+| Windows | `PostureGuard-Setup-x.y.z.exe` |
+| macOS | `PostureGuard-x.y.z.dmg` |
+| Linux | `PostureGuard-x.y.z.AppImage` |
+
+---
+
+## 🚀 Development Setup
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/) v9+
 
 ### Getting Started
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/neda420/PostureGuard.git
-   cd PostureGuard
-   ```
+```bash
+git clone https://github.com/neda420/Project-Posture-Gaurd-for-PC-User.git
+cd Project-Posture-Gaurd-for-PC-User
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+# Install root app dependencies
+npm install
 
-3. **Run the application in Development Mode:**
-   ```bash
-   npm run dev:electron
-   ```
+# Install & build the SDK
+cd packages/posture-guard-sdk && npm install && npm run build && cd ../..
 
-### Building the Executable (SDK/App)
+# Run the desktop app in development mode
+npm run dev:electron
+```
 
-To build the downloadable `.exe` (or `.dmg`/`.AppImage`):
+### Building the desktop installer
 
 ```bash
 npm run build:electron
+# Output: dist/PostureGuard-Setup-*.exe (or .dmg / .AppImage)
 ```
-The compiled executable will be located in the `dist` folder. Simply double-click to install!
 
-## 🧠 Architecture
+### Working on the SDK
 
-PostureGuard is built on a modern, robust stack tailored for desktop applications:
+```bash
+cd packages/posture-guard-sdk
 
-* **Frontend UI**: Next.js (React)
-* **Desktop Shell**: Electron (with `electron-builder` for distribution)
-* **Machine Learning**: `@tensorflow/tfjs` + `@tensorflow-models/pose-detection`
-* **Local Database**: Prisma ORM with SQLite (for saving settings and Pomodoro stats locally)
+npm run lint       # TypeScript type-check
+npm test           # unit tests (Vitest)
+npm run build      # ESM + CJS + type declarations
+```
+
+---
+
+## 🏗️ Architecture
+
+```
+.
+├── src/                       # Next.js + Electron UI (desktop app)
+│   ├── app/                   # Next.js App Router pages & styles
+│   └── components/            # React components (PostureCamera, etc.)
+├── packages/
+│   └── posture-guard-sdk/     # ← publishable npm SDK
+│       ├── src/
+│       │   ├── analyzePosture.ts   # pure posture logic
+│       │   ├── PostureDetector.ts  # high-level detector class
+│       │   ├── EventEmitter.ts     # typed event emitter
+│       │   └── types.ts            # TypeScript types
+│       └── dist/              # generated (ESM + CJS + .d.ts)
+├── main.js                    # Electron main process (secure)
+├── preload.js                 # contextBridge IPC bridge
+└── docs/                      # API reference & usage examples
+```
+
+**Stack:**
+* **Frontend UI**: Next.js 16 (React 19)
+* **Desktop Shell**: Electron 41 with `electron-builder`
+* **Machine Learning**: `@tensorflow/tfjs` + `@tensorflow-models/pose-detection` (MoveNet)
+* **Local Database**: Prisma ORM with SQLite
+* **SDK Build**: `tsup` (ESM + CJS + TypeScript declarations)
+* **Testing**: Vitest
+
+---
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! 
+Contributions, issues, and feature requests are welcome!  
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a PR.
+
 1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Create your feature branch (`git checkout -b feat/amazing-feature`)
+3. Commit using [Conventional Commits](https://www.conventionalcommits.org/)
+4. Push and open a Pull Request against `main`
+
+---
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
+
 *Inspired by the need for better ergonomics in the digital age.*

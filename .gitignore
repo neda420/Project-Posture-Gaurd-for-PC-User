@@ -44,3 +44,6 @@ next-env.d.ts
 
 # electron builds
 /dist/
+
+# SDK build output
+/packages/posture-guard-sdk/dist/
