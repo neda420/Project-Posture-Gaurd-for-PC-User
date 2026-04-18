@@ -2,11 +2,29 @@
   "name": "posture-guard",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
+  "build": {
+    "appId": "com.neda420.postureguard",
+    "productName": "PostureGuard",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "out/**/*",
+      "main.js",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "next lint",
+    "dev:electron": "concurrently -k \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "build:electron": "npm run build && electron-builder"
   },
   "dependencies": {
     "@prisma/client": "^7.7.0",
@@ -24,8 +42,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "electron": "^41.2.1",
+    "electron-builder": "^26.8.1",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^9.0.5"
   }
 }
