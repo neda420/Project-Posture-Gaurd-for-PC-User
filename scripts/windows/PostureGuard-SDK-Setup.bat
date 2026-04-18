@@ -31,6 +31,11 @@ if not exist package.json (
   echo [INFO] Creating starter npm project in:
   echo        %TARGET_DIR%
   call npm init -y >nul
+  if errorlevel 1 (
+    echo [ERROR] Failed to initialize npm project.
+    pause
+    exit /b 1
+  )
 )
 
 echo [INFO] Installing PostureGuard SDK and required dependencies...
