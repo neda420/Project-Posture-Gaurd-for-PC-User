@@ -1,19 +1,22 @@
-name: Build Electron Distributables
+name: Build and Release Windows Installer
 
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag name to publish (e.g., v1.0.0)"
+        required: true
+        type: string
 
 jobs:
-  build:
-    name: Build ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  release-windows:
+    name: Build Windows Installer
+    runs-on: windows-latest
     permissions:
-      contents: write  # Required to upload release assets
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -28,25 +31,34 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js app
+      - name: Build production Windows installer
         run: npm run build
-
-      - name: Build Electron distributable
-        run: npm run build:electron
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload distributable artifact
+      - name: Upload installer artifact
         uses: actions/upload-artifact@v4
         with:
-          name: posture-guard-${{ matrix.os }}
-          path: dist/
+          name: posture-guard-windows-installer
+          path: dist/*.exe
           retention-days: 30
+
+      - name: Resolve release tag
+        id: release_tag
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" = "workflow_dispatch" ]]; then
+            echo "tag=${{ inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: dist/**/*.{exe,dmg,AppImage,deb,rpm}
+          tag_name: ${{ steps.release_tag.outputs.tag }}
+          generate_release_notes: true
+          files: dist/*.exe
+          fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

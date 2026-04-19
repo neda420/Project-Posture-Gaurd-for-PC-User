@@ -1,0 +1,23 @@
+appId: com.neda420.postureguard
+productName: PostureGuard
+
+directories:
+  output: dist
+
+files:
+  - out/**/*
+  - main.js
+  - preload.js
+  - package.json
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+  artifactName: ${productName}-Setup-${version}.${ext}

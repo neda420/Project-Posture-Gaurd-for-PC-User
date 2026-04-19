@@ -1,9 +1,6 @@
 const { app, BrowserWindow, ipcMain, Notification } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
-const serve = require('electron-serve');
-
-const loadURL = serve({ directory: 'out' });
 
 let mainWindow;
 
@@ -21,6 +18,9 @@ ipcMain.on('trigger-alert', (event) => {
 });
 
 function createWindow() {
+  const preloadPath = path.join(app.getAppPath(), 'preload.js');
+  const productionIndexPath = path.join(app.getAppPath(), 'out', 'index.html');
+
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
@@ -32,7 +32,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
       sandbox: true,
-      preload: path.join(__dirname, 'preload.js'),
+      preload: preloadPath,
     },
     autoHideMenuBar: true,
   });
@@ -41,7 +41,7 @@ function createWindow() {
     mainWindow.loadURL('http://localhost:3000');
     // mainWindow.webContents.openDevTools();
   } else {
-    loadURL(mainWindow);
+    mainWindow.loadFile(productionIndexPath);
   }
 
   mainWindow.on('closed', () => {

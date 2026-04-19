@@ -55,7 +55,7 @@ jobs:
         run: npm run lint
 
       - name: Build Next.js app
-        run: npm run build
+        run: npm run build:next
 
   security-audit:
     name: Security Audit

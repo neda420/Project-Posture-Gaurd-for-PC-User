@@ -6,28 +6,14 @@
     "packages/*"
   ],
   "main": "main.js",
-  "build": {
-    "appId": "com.neda420.postureguard",
-    "productName": "PostureGuard",
-    "directories": {
-      "output": "dist"
-    },
-    "files": [
-      "out/**/*",
-      "main.js",
-      "package.json"
-    ],
-    "win": {
-      "target": "nsis"
-    }
-  },
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "build": "npm run build:next && electron-builder",
+    "build:next": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
     "dev:electron": "concurrently -k \"npm run dev\" \"wait-on http://localhost:3000 && electron .\"",
-    "build:electron": "npm run build && electron-builder"
+    "build:electron": "npm run build"
   },
   "dependencies": {
     "@tensorflow-models/pose-detection": "^2.1.3",
