@@ -67,15 +67,18 @@ await detector.start();
 
 ---
 
-## 🖥️ Download the Desktop App
+## 🖥️ Download for Windows
 
-Pre-built installers are attached to every [GitHub Release](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/releases):
+Download the latest Windows installer from GitHub Releases:
 
-| Platform | File |
-|---|---|
-| Windows | `PostureGuard-Setup-x.y.z.exe` |
-| macOS | `PostureGuard-x.y.z.dmg` |
-| Linux | `PostureGuard-x.y.z.AppImage` |
+➡️ **[Download PostureGuard for Windows (.exe)](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/releases/latest)**
+
+### Note for Windows Users
+
+Because this installer is not code-signed yet, Windows SmartScreen may show an **"Unknown Publisher"** warning.  
+To continue:
+1. Click **More info**
+2. Click **Run anyway**
 
 ---
 
