@@ -108,7 +108,7 @@ npm run dev:electron
 
 ```bash
 npm run build:electron
-# Output: dist/PostureGuard-Setup-*.exe (or .dmg / .AppImage)
+# Output: dist/PostureGuard-Setup-*.exe
 ```
 
 ### Working on the SDK
