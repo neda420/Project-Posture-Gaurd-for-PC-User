@@ -37,9 +37,7 @@ function createWindow() {
     autoHideMenuBar: true,
   });
 
-  if (app.isPackaged) {
-    mainWindow.loadFile(productionIndexPath);
-  } else if (isDev) {
+  if (isDev) {
     mainWindow.loadURL('http://localhost:3000');
     // mainWindow.webContents.openDevTools();
   } else {

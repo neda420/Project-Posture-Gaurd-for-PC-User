@@ -9,8 +9,6 @@ files:
   - main.js
   - preload.js
   - package.json
-  - models/**/*
-  - public/models/**/*
 
 win:
   target:
