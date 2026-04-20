@@ -2,7 +2,10 @@
   
   <h1>PostureGuard 🧘‍♂️</h1>
   <p><strong>Maintain perfect posture and boost productivity with AI.</strong></p>
-  
+<img width="1918" height="968" alt="Screenshot 2026-04-20 114657" src="https://github.com/user-attachments/assets/951615a4-eba9-4c14-9e4f-f34cdbf8d1f9" />
+<img width="1919" height="970" alt="Screenshot 2026-04-20 114720" src="https://github.com/user-attachments/assets/f80dff80-8b3b-4f40-af71-6fd1045bad68" />
+
+
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![npm version](https://img.shields.io/npm/v/posture-guard-sdk)](https://www.npmjs.com/package/posture-guard-sdk)
   [![CI](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/actions/workflows/ci.yml/badge.svg)](https://github.com/neda420/Project-Posture-Gaurd-for-PC-User/actions/workflows/ci.yml)
