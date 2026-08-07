@@ -3,7 +3,7 @@
 # Syntax: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Global default – all files
-*                                   @neda420
+*                                   @neda420 
 
 # SDK core
 /packages/posture-guard-sdk/        @neda420
