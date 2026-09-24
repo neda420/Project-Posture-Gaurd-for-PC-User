@@ -8,7 +8,7 @@ Thank you for your interest in contributing! Every bug report, idea, and pull re
 - [Getting started](#getting-started)
 - [Repository structure](#repository-structure)
 - [Development workflow](#development-workflow)
-- [Submitting a pull request](#submitting-a-pull-request)
+- [Submitting a pull request](#submitting-a-pull-request) 
 - [Commit message format](#commit-message-format)
 - [Versioning policy](#versioning-policy)
 - [Reporting security vulnerabilities](#reporting-security-vulnerabilities)
