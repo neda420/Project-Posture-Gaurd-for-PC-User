@@ -1,7 +1,7 @@
 # Contributing to PostureGuard
 
 Thank you for your interest in contributing! Every bug report, idea, and pull request is valued.
-
+ 
 ## Table of contents
   
 - [Code of Conduct](#code-of-conduct)
