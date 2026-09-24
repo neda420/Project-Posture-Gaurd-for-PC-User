@@ -47,7 +47,7 @@ cd packages/posture-guard-sdk && npm install && cd ../..
 ---
 
 ## Repository structure
-
+ 
 ```
 .
 ├── src/                      # Next.js + Electron UI (the desktop app)
