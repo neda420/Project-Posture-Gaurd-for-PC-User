@@ -1,5 +1,5 @@
 <div align="center">
-  
+   
   <h1>PostureGuard 🧘‍♂️</h1>
   <p><strong>Maintain perfect posture and boost productivity with AI.</strong></p>
 <img width="1918" height="968" alt="Screenshot 2026-04-20 114657" src="https://github.com/user-attachments/assets/951615a4-eba9-4c14-9e4f-f34cdbf8d1f9" />
